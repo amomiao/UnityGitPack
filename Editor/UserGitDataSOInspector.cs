@@ -1,20 +1,19 @@
 using Momos.UnityGitPack.Common;
+using System.IO;
 using UnityEditor;
 using UnityEngine;
 
 namespace Momos.UnityGitPackEditor.Common {
-    using static GitHubApiService.E_CreateRepoState;
-
-    [CustomEditor(typeof(UserGitDataSO))]
+    [CustomEditor(typeof(UnityGitPackDataSO))]
     public class UserGitDataSOInspector : Editor {
-        UserGitDataSO _this;
+        UnityGitPackDataSO _this;
 
         private void OnEnable() {
-            _this = (UserGitDataSO)this.target;
+            _this = (UnityGitPackDataSO)this.target;
         }
 
         public override void OnInspectorGUI() {
-            _this.Data ??= new UserGitData();
+            _this.gitData ??= new UserGitData();
             base.OnInspectorGUI();
 
             if (GUILayout.Button("TokenWeb")) {
@@ -22,19 +21,20 @@ namespace Momos.UnityGitPackEditor.Common {
             }
 
             if (GUILayout.Button("Check Token")) {
-                bool ok = GitHubApiService.CheckToken(_this.Data, out string msg);
+                bool ok = GitHubApiService.CheckToken(_this.gitData, out string msg);
                 EditorUtility.DisplayDialog("Check Token Result", msg, "OK");
             }
 
             if (GUILayout.Button("Create Repo")) {
-                var result = GitHubApiService.CreateRepo(_this.Data);
+                var result = GitHubApiService.CreateRepo(_this.gitData);
 
                 EditorUtility.DisplayDialog("Create Repo Result",
                     $"Result: {result.State}\nMessage: {result.Message}", "OK");
             }
 
             if (GUILayout.Button("Push")) {
-                bool ok = GitLocalService.Push(_this.Data, out string msg);
+                File.WriteAllText("package.json", JsonUtility.ToJson(_this.upmData));
+                bool ok = GitLocalService.Push(_this.gitData, out string msg);
                 EditorUtility.DisplayDialog("Push", msg, "OK");
             }
 

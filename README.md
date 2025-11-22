@@ -27,7 +27,10 @@
 2.使用ScriptableObject
 	1) Project右键Create->Tools->MomosUnityGitPack->Create User Git Settings
 		切记不要把这个提交了,会暴露token!!!
-	2) 填写
+	2) 填写GitData
 		// 如此填写,设计中不希望用户整个提交Assets目录。
 		Local Package Path Of Assets: Scripts/xxPack
-
+	3) 填写UpmData
+		Name: com.xxx.xxx //需符合反向域名规范
+		Version: x.y.z
+		Unity: 版本号
