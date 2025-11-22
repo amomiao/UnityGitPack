@@ -27,6 +27,30 @@ namespace Momos.UnityGitPack.Common {
             }
         }
 
+        /// <summary>
+        /// 拉取远程更新
+        /// </summary>
+        public static bool Pull(UserGitData data, out string message, bool rebase = true) {
+            string dir = data.DirPath;
+            if (!Directory.Exists(dir)) {
+                message = $"Directory does not exist: {dir}";
+                return false;
+            }
+
+            string branch = data.defaultBranch;
+
+            string pullCmd = rebase ? $"pull --rebase origin {branch}" : $"pull origin {branch}";
+            bool result = Execute(dir, pullCmd, out message);
+
+            if (!result) {
+                message = "Pull failed:\n" + message;
+            }
+            else {
+                message = "Pull success:\n" + message;
+            }
+            return result;
+        }
+
         public static bool Push(UserGitData data, out string message) {
             string dir = data.DirPath;
 

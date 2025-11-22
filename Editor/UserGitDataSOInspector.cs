@@ -32,6 +32,11 @@ namespace Momos.UnityGitPackEditor.Common {
                     $"Result: {result.State}\nMessage: {result.Message}", "OK");
             }
 
+            if (GUILayout.Button("Pull")) {
+                bool ok = GitLocalService.Pull(_this.gitData, out string msg);
+                EditorUtility.DisplayDialog("Pull", msg, "OK");
+            }
+
             if (GUILayout.Button("Push")) {
                 File.WriteAllText(Path.Combine(_this.gitData.DirPath, "package.json"), JsonUtility.ToJson(_this.upmData));
                 bool ok = GitLocalService.Push(_this.gitData, out string msg);
