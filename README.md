@@ -1,4 +1,4 @@
-\\\text
+```text
 # UnityGitPack
 1.申领Token步骤
 	1)Resource owner
@@ -35,4 +35,4 @@
 		Name: com.xxx.xxx //需符合反向域名规范
 		Version: x.y.z
 		Unity: 版本号
-\\\
+```
