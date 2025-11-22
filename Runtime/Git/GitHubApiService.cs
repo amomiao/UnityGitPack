@@ -1,10 +1,8 @@
-using Momos.UnityGitPack.Common;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
-using Unity.VisualScripting;
 
-namespace Momos.UnityGitPackEditor.Common {
+namespace Momos.UnityGitPack.Common {
     public static class GitHubApiService {
         public enum E_CreateRepoState {
             Success,

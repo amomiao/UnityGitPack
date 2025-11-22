@@ -1,9 +1,8 @@
-using Momos.UnityGitPack.Common;
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 
-namespace Momos.UnityGitPackEditor.Common {
+namespace Momos.UnityGitPack.Common {
     public static class GitLocalService {
         private static bool Execute(string workingDir, string command, out string output) {
             try {
@@ -61,8 +60,6 @@ namespace Momos.UnityGitPackEditor.Common {
                 return false;
 
             // Step 4: 拉取远端，避免 "src refspec main does not match any" 和 "unrelated histories"
-            //
-            // **关键新增**
             Execute(dir, $"pull origin {data.defaultBranch} --allow-unrelated-histories", out _);
 
             // Step 5: push
