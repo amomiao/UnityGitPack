@@ -46,6 +46,9 @@ namespace Momos.UnityGitPackEditor.Common {
             if (!Execute(dir, "init", out message))
                 return false;
 
+            // Step 1.5 重命名本地分支为 Default Branch
+            Execute(dir, $"branch -M {data.defaultBranch}", out _);
+
             // Step 2: add remote
             Execute(dir, "remote remove origin", out _); // prevent duplicates
             if (!Execute(dir, $"remote add origin {remoteUrl}", out message))
