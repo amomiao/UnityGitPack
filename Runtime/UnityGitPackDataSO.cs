@@ -9,5 +9,6 @@ namespace Momos.UnityGitPack.Common {
     public class UnityGitPackDataSO : ScriptableObject {
         public UserGitData gitData = new UserGitData();
         public UPMData upmData = new UPMData();
+        public short proxyPort = 7890;
     }
 }

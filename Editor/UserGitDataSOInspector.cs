@@ -38,6 +38,12 @@ namespace Momos.UnityGitPackEditor.Common {
                 EditorUtility.DisplayDialog("Push", msg, "OK");
             }
 
+            if (GUILayout.Button("Push(Proxy)")) {
+                File.WriteAllText(Path.Combine(_this.gitData.DirPath, "package.json"), JsonUtility.ToJson(_this.upmData));
+                bool ok = GitLocalService.PushProxy(_this.gitData, out string msg, _this.proxyPort);
+                EditorUtility.DisplayDialog("Push(Proxy)", msg, "OK");
+            }
+
             if (GUI.changed)
                 EditorUtility.SetDirty(target);
         }

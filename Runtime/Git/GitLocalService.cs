@@ -54,10 +54,15 @@ namespace Momos.UnityGitPack.Common {
                 return false;
 
             // Step 3: add & commit
-            if (!Execute(dir, "add .", out message))
-                return false;
-            if (!Execute(dir, "commit -m \"Initial commit from UnityGitPack\"", out message))
-                return false;
+            // Push失败时commit是成功的,再次提交需要绕过逻辑
+            Execute(dir, "status --porcelain", out var status);
+            bool hasChanges = !string.IsNullOrWhiteSpace(status);
+            if (hasChanges) {
+                if (!Execute(dir, "add .", out message))
+                    return false;
+                if (!Execute(dir, "commit -m \"Initial commit from UnityGitPack\"", out message))
+                    return false;
+            }
 
             // Step 4: 拉取远端，避免 "src refspec main does not match any" 和 "unrelated histories"
             Execute(dir, $"pull origin {data.defaultBranch} --allow-unrelated-histories", out _);
@@ -68,6 +73,19 @@ namespace Momos.UnityGitPack.Common {
 
             message = "Push success!\n\n" + message;
             return true;
+        }
+
+        public static bool PushProxy(UserGitData data, out string message, short port) {
+            string dir = data.DirPath;
+            Execute(dir, $"config http.proxy http://127.0.0.1:{port}", out _);
+            Execute(dir, $"config https.proxy http://127.0.0.1:{port}", out _);
+            bool result = Push(data, out message);
+            Execute(dir, "config --unset http.proxy", out _);
+            Execute(dir, "config --unset https.proxy", out _);
+            if (!result) {
+                message = "Proxy Push Failed\n" + message;
+            }
+            return result;
         }
     }
 }
