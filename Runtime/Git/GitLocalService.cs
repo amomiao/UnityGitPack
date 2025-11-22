@@ -28,7 +28,7 @@ namespace Momos.UnityGitPack.Common {
         }
 
         public static bool Push(UserGitData data, out string message) {
-            string dir = Path.Combine(Application.dataPath, data.localPackagePathOfAssets);
+            string dir = data.DirPath;
 
             if (string.IsNullOrEmpty(data.localPackagePathOfAssets)) {
                 message = $"{nameof(data.localPackagePathOfAssets)} is Empty!";

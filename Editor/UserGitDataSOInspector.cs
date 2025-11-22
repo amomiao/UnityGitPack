@@ -33,7 +33,7 @@ namespace Momos.UnityGitPackEditor.Common {
             }
 
             if (GUILayout.Button("Push")) {
-                File.WriteAllText("package.json", JsonUtility.ToJson(_this.upmData));
+                File.WriteAllText(Path.Combine(_this.gitData.DirPath, "package.json"), JsonUtility.ToJson(_this.upmData));
                 bool ok = GitLocalService.Push(_this.gitData, out string msg);
                 EditorUtility.DisplayDialog("Push", msg, "OK");
             }

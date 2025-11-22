@@ -1,4 +1,7 @@
 using System;
+using System.IO;
+using UnityEngine;
+
 namespace Momos.UnityGitPack.Common {
     [Serializable]
     public class UserGitData {
@@ -58,5 +61,7 @@ namespace Momos.UnityGitPack.Common {
         /// 创建仓库后要推送的默认分支名（main / master）。
         /// </summary>
         public string defaultBranch = "main";
+
+        public string DirPath => Path.Combine(Application.dataPath, localPackagePathOfAssets);
     }
 }
