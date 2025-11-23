@@ -29,6 +29,7 @@
 	1) Project右键Create->Tools->MomosUnityGitPack->Create User Git Settings
 		切记不要把这个提交了,会暴露token!!!
 	2) 填写GitData
+		RepoName: 强调一下不要加空格, 否则空格会按'-'生成进项目名。
 		// 如此填写,设计中不希望用户整个提交Assets目录。
 		Local Package Path Of Assets: Scripts/xxPack
 	3) 填写UpmData

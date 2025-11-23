@@ -62,6 +62,20 @@ namespace Momos.UnityGitPack.Common {
         /// </summary>
         public string defaultBranch = "main";
 
+        /// <summary>
+        /// 提交概述
+        /// </summary>
+        [Multiline(3)]
+        public string submitTitle = string.Empty;
+
+        /// <summary>
+        /// 提交描述
+        /// </summary>
+        [Multiline(5)]
+        public string submitBody = string.Empty;
+
         public string DirPath => Path.Combine(Application.dataPath, localPackagePathOfAssets);
+        public string SubmitTitle => string.IsNullOrWhiteSpace(submitTitle) ? "Update" : submitTitle.Replace("\"", "'");
+        public string SubmitBody => string.IsNullOrWhiteSpace(submitBody) ? $"Commit at {DateTime.Now:yyyy-MM-dd HH:mm:ss}" : submitBody.Replace("\"", "'");
     }
 }
