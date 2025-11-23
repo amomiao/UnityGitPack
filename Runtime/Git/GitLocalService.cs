@@ -1,10 +1,14 @@
+<<<<<<< HEAD
 using System;
+=======
+>>>>>>> ce03a11995b5f839167f43985ea17717011872af
 using System.Diagnostics;
 using System.IO;
 using UnityEngine;
 
 namespace Momos.UnityGitPack.Common {
     public static class GitLocalService {
+<<<<<<< HEAD
         /// <summary>
         /// 执行 Git 命令
         /// </summary>
@@ -57,13 +61,36 @@ namespace Momos.UnityGitPack.Common {
             }
             catch (Exception ex) {
                 // 捕获异常并输出
+=======
+        private static bool Execute(string workingDir, string command, out string output) {
+            try {
+                ProcessStartInfo psi = new ProcessStartInfo("git", command) {
+                    WorkingDirectory = workingDir,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                Process p = Process.Start(psi);
+                p.WaitForExit();
+
+                output = p.StandardOutput.ReadToEnd() + "\n" + p.StandardError.ReadToEnd();
+
+                return p.ExitCode == 0;
+            }
+            catch (System.Exception ex) {
+>>>>>>> ce03a11995b5f839167f43985ea17717011872af
                 output = "Exception: " + ex.Message;
                 return false;
             }
         }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> ce03a11995b5f839167f43985ea17717011872af
         /// <summary>
         /// 拉取远程更新
         /// </summary>
