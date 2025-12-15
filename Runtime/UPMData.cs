@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using UnityEngine;
 
 namespace Momos.UnityGitPack.Common {
     [Serializable]
@@ -29,6 +30,8 @@ namespace Momos.UnityGitPack.Common {
 
         #region IJsonWritable
         public string ToJson() {
+            return JsonUtility.ToJson(this);
+
             var sb = new StringBuilder(512);
             sb.AppendLine("{");
 
