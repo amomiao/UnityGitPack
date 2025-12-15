@@ -1,6 +1,6 @@
 {
     "name": "Momos.UnityGitPack",
-    "rootNamespace": "",
+    "rootNamespace": "Momos.UnityGitPack",
     "references": [],
     "includePlatforms": [
         "Editor"
