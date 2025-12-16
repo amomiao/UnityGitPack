@@ -16,7 +16,7 @@ namespace Momos.UnityGitPack.Common {
         [Serializable]
         public class DependencyData {
             public string name;        // com.xxx.yyy
-            public string reference;   // semver | git | file
+            public string reference;   
         }
 
         public string name;

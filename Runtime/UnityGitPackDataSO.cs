@@ -7,6 +7,7 @@ using UnityEngine;
 namespace Momos.UnityGitPack.Common {
     [CreateAssetMenu(fileName = "UnityGitPack Data", menuName = "Tools/MomosUnityGitPack/Create UnityGitPack Data")]
     public class UnityGitPackDataSO : ScriptableObject {
+        public string leadAuthor;
         public UserGitData gitData = new UserGitData();
         public UPMData upmData = new UPMData();
         public short proxyPort = 7890;

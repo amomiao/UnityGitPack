@@ -1,7 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using UnityEditor.Experimental.GraphView;
+using UnityEditor.VersionControl;
 using UnityEngine;
+using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
 
 namespace Momos.UnityGitPack.Common {
     public static class GitLocalService {
@@ -61,6 +64,7 @@ namespace Momos.UnityGitPack.Common {
                 return false;
             }
         }
+
         /// <summary>
         /// 拉取远程更新
         /// </summary>
@@ -81,6 +85,19 @@ namespace Momos.UnityGitPack.Common {
             }
             else {
                 message = "Pull success:\n" + message;
+            }
+            return result;
+        }
+
+        public static bool PullProxy(UserGitData data, out string message, bool rebase, short port) {
+            string dir = data.DirPath;
+            Execute(dir, $"config http.proxy http://127.0.0.1:{port}", out _);
+            Execute(dir, $"config https.proxy http://127.0.0.1:{port}", out _);
+            bool result = Pull(data, out message, rebase);
+            Execute(dir, "config --unset http.proxy", out _);
+            Execute(dir, "config --unset https.proxy", out _);
+            if (!result) {
+                message = "Proxy Push Failed\n" + message;
             }
             return result;
         }

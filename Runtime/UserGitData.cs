@@ -6,10 +6,11 @@ namespace Momos.UnityGitPack.Common {
     [Serializable]
     public class UserGitData {
         public enum GitProvider {
-            GitHub,
+            GitHub = 0,
             GitLab,
             Bitbucket,
-            Gitea
+            Gitea,
+            Customize
         }
 
         /// <summary>
@@ -28,6 +29,7 @@ namespace Momos.UnityGitPack.Common {
         /// 用于 API 鉴权。
         /// 建议只在本地加密保存。
         /// </summary>
+        [TextArea(1,2)]
         public string accessToken;
 
         /// <summary>
@@ -65,13 +67,13 @@ namespace Momos.UnityGitPack.Common {
         /// <summary>
         /// 提交概述
         /// </summary>
-        [Multiline(3)]
+        [TextArea(1, 5)]
         public string submitTitle = string.Empty;
 
         /// <summary>
         /// 提交描述
         /// </summary>
-        [Multiline(5)]
+        [TextArea(1, 10)]
         public string submitBody = string.Empty;
 
         public string DirPath => Path.Combine(Application.dataPath, localPackagePathOfAssets);
